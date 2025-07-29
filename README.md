@@ -270,6 +270,35 @@ To use the n8n UI:
         Trigger workflows manually or via API
 
 
+### trouble shooting
+PS D:\demo-projects-2025\n8n-agent-gold-price> docker-compose up -d
+empty compose file
+
+https://codebeautify.org/yaml-validator
+docker-compose -f ./docker-compose.yml up -d
+
+Open a terminal in your n8n directory (where Docker is running).
+
+2. issue
+Run the following command inside the Docker container:
+
+docker exec -it n8n-agent-gold-price-n8n-1 n8n install n8n-nodes-html-extract
+
+(If your container is not named n8n, replace n8n with your container name from docker ps.)
+
+Restart the container:
+
+    docker restart n8n
+
+    Now go to the UI again and search for “HTML Extract” node.
+
+
+
+docker ps
+
+docker-compose down
+docker-compose up -d
+<img width="975" height="390" alt="image" src="https://github.com/user-attachments/assets/89cb6aef-99e2-4fda-9e5c-51c761ddc1cf" />
 
 ---
 
