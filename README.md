@@ -298,7 +298,8 @@ docker ps
 
 docker-compose down
 docker-compose up -d
-<img width="975" height="390" alt="image" src="https://github.com/user-attachments/assets/89cb6aef-99e2-4fda-9e5c-51c761ddc1cf" />
+
+https://github.com/cheitra07/n8n-agent-to_fetch_latest-gold_price/issues/1
 
 ---
 
