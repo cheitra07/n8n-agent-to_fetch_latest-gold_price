@@ -1,11 +1,91 @@
-version: "3"
-
-services:
-  n8n:
-    image: n8nio/n8n
-    ports:
-      - "5678:5678"
-    environment:
-      - GENERIC_TIMEZONE=Asia/Kolkata
-    volumes:
-      - ./n8n:/home/node/.n8n
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "GET",
+        "path": "gold-price-webhook"
+      },
+      "id": "1",
+      "name": "Webhook Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://www.livechennai.com/gold_silverrate.asp",
+        "responseFormat": "string",
+        "options": {
+          "headers": {
+            "User-Agent": "Mozilla/5.0"
+          }
+        }
+      },
+      "id": "2",
+      "name": "Fetch Gold HTML",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [400, 300]
+    },
+    {
+      "parameters": {
+        "functionCode": "const html = items[0].json;\n\nif (!html || typeof html !== 'string') {\n  return [{ json: { gold_price: \"Error: HTML not found or not string\" }}];\n}\n\nconst regex = /<td[^>]*>\\s*22 Carat Gold \\(1g\\)\\s*<\\/td>\\s*<td[^>]*>\\s*(₹[\\d,]+)\\s*<\\/td>/i;\nconst match = html.match(regex);\n\nreturn [\n  {\n    json: {\n      gold_price: match ? match[1] : \"Not Found\"\n    }\n  }\n];"
+      },
+      "id": "3",
+      "name": "Extract Price (Regex)",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [620, 300]
+    },
+    {
+      "parameters": {
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "4",
+      "name": "Return Result",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [820, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Trigger": {
+      "main": [
+        [
+          {
+            "node": "Fetch Gold HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Gold HTML": {
+      "main": [
+        [
+          {
+            "node": "Extract Price (Regex)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Price (Regex)": {
+      "main": [
+        [
+          {
+            "node": "Return Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "name": "Gold Price Fetch (Fixed)",
+  "versionId": "1"
+}
