@@ -301,9 +301,9 @@ docker-compose up -d
 
 ## Screenshot
 
-![Gold Price Workflow](## Screenshot
 
-![Gold Price Workflow](https://n8n agent.png
+
+![Gold Price Workflow](https://n8n agent.png)
 
 
 
