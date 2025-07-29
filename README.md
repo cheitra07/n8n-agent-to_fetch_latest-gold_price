@@ -301,7 +301,8 @@ docker-compose up -d
 
 ## Screenshot
 
-![Gold Price Workflow](https://github.com/user-attachments/assets/39a33cb6-acfb-48bd-8ecf-394853e64992" />
+![Gold Price Workflow](<img width="948" height="299" alt="image" src="https://github.com/user-attachments/assets/b53f326b-b974-48e7-86ca-6981c6e2d2c8" />
+
 
 
 
