@@ -303,7 +303,8 @@ docker-compose up -d
 
 
 
-![Gold Price Workflow](https://github.com/cheitra07/n8n-agent-to_fetch_latest-gold_price/n8n agent.png)
+![Gold Price Workflow](https://github.com/cheitra07/n8n-agent-to_fetch_latest-gold_price/raw/main/n8n%20agent.png)
+
 
 
 
